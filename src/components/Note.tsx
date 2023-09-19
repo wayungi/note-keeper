@@ -1,9 +1,9 @@
 import {useState} from 'react';
 import {AiFillDelete} from 'react-icons/ai';
-
+import noteModel from '../model/noteModel';
 
 type noteProps = {
-    note : {text: string, date: string, id: string}
+    note : noteModel, /*{text: string, date: string, id: string}*/
     setNoteText: (text: string) => void,
     deleteNote: (id: string) => void
 }
