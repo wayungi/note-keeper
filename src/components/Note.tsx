@@ -29,7 +29,7 @@ const Note = ({note, setNoteText, deleteNote}: noteProps): JSX.Element /*other t
     }
 
     return (
-        <article>
+        <article className="notes">
             {isEditable && <textarea
                 placeholder="Add notes here ..."
                 onChange={(e) => handleTextChange(e.target.value)}
