@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Mooli&display=swap');
+
+
+* {
+  margin:0;
+  padding:0;
+}
+
+html {
+  font-size:12px;
+  font-family: 'Mooli', sans-serif;
+}
+
+section.notes-list {
+  outline:1px solid back;
+  background-color: aqua;
+}

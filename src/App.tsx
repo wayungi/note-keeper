@@ -11,9 +11,9 @@ const App = () => {
       id: "0980"
     },
     {
-      text: "today is it",
+      text: "Golan heights",
       date: new Date().toLocaleDateString(),
-      id: "0980"
+      id: "0988"
     }
   ]
 

@@ -9,10 +9,10 @@ type NotesListProps = {
 
 const NotesList = ({notes, setNoteText, deleteNote}: NotesListProps) => {
 
-    const displayNotes: JSX.Element[] = notes.map((note) => <Note note={note} setNoteText={setNoteText} deleteNote={deleteNote}/>)
+    const displayNotes: JSX.Element[] = notes.map((note) => <Note key={note.id} note={note} setNoteText={setNoteText} deleteNote={deleteNote}/>)
 
     return (
-        <section>
+        <section className="notes-list">
             {displayNotes}
         </section>
     );
