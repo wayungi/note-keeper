@@ -1,13 +1,21 @@
 import './App.css'
-import Note from './components/Note'
+import NotesList from './components/NotesList';
+import noteModel from './model/noteModel';
 
 const App = () => {
 
-  const note =  {
-    text: "today is it",
-    date: new Date().toLocaleDateString(),
-    id: "0980"
-  }
+  const notes: noteModel[] =  [
+    {
+      text: 'today is it',
+      date: new Date().toLocaleDateString(),
+      id: "0980"
+    },
+    {
+      text: "today is it",
+      date: new Date().toLocaleDateString(),
+      id: "0980"
+    }
+  ]
 
   const setNoteText = () => {
     console.log('hello world');
@@ -20,7 +28,7 @@ const App = () => {
 
   return (
     <>
-      <Note note={note} setNoteText={setNoteText} deleteNote={deleteNote}/>
+      <NotesList notes={notes} setNoteText={setNoteText} deleteNote={deleteNote}/>
     </>
   )
 }
