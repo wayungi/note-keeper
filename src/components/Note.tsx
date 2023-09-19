@@ -10,7 +10,13 @@ import {AiFillDelete} from 'react-icons/ai';
 
 */ 
 
-const Note = ({note, setNoteText, deleteNote}) => {
+type noteProps = {
+    note : {text: string, date: string, id: string}
+    setNoteText: (text: string) => void,
+    deleteNote: (id: string) => void
+}
+
+const Note = ({note, setNoteText, deleteNote}: noteProps): JSX.Element => {
 
     const [text, setText] = useState<string>("");
     const [isEditable, setIsEditable] =  useState<boolean>(false);
@@ -50,3 +56,5 @@ const Note = ({note, setNoteText, deleteNote}) => {
 };
 
 export default Note;
+
+// you can also have return type of  ReactElement === return <h1>tags</h1>
