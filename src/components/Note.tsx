@@ -29,7 +29,7 @@ const Note = ({note, setNoteText, deleteNote}: noteProps): JSX.Element /*other t
     }
 
     return (
-        <section>
+        <article>
             {isEditable && <textarea
                 placeholder="Add notes here ..."
                 onChange={(e) => handleTextChange(e.target.value)}
@@ -43,7 +43,7 @@ const Note = ({note, setNoteText, deleteNote}: noteProps): JSX.Element /*other t
                 { isEditable && <button onClick={() => handleEditable()}>save</button>}
                 <AiFillDelete onClick={() => handleDeleteNote(note.id)}/>
             </footer>
-        </section>
+        </article>
     )
 };
 
