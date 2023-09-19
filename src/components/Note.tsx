@@ -1,14 +1,6 @@
 import {useState} from 'react';
 import {AiFillDelete} from 'react-icons/ai';
 
-/*
-    {
-        text: string
-        date: new Date().toLocaleDateString()
-        id: string
-    }
-
-*/ 
 
 type noteProps = {
     note : {text: string, date: string, id: string}
@@ -16,23 +8,23 @@ type noteProps = {
     deleteNote: (id: string) => void
 }
 
-const Note = ({note, setNoteText, deleteNote}: noteProps): JSX.Element => {
+const Note = ({note, setNoteText, deleteNote}: noteProps): JSX.Element /*other types include: ReactNode, ...*/ => {
 
     const [text, setText] = useState<string>("");
     const [isEditable, setIsEditable] =  useState<boolean>(false);
-    const characterCount = 200;
+    const characterCount: number = 200;
 
-    const handleTextChange = (value) => {
+    const handleTextChange = (value: string): void => {
         if(characterCount - value.length <= 0) return;
         setText(value);
         setNoteText(value);
     }
 
-    const handleEditable = () => {
+    const handleEditable = (): void => {
         setIsEditable((prev) => !prev)
     }
 
-    const handleDeleteNote = (id) => {
+    const handleDeleteNote = (id: string): void => {
         deleteNote(id);
     }
 
