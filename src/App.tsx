@@ -23,8 +23,9 @@ const App = () => {
     console.log('hello world');
   }
 
-  const deleteNote = (): void => {
-    console.log("delete note")
+  const deleteNote = (id: string): void => {
+    const filteredNotes: noteModel[] = notes.filter((note) => note.id !== id);
+    setNotes([...filteredNotes]);
   }
 
   const addNote = (): void => {
