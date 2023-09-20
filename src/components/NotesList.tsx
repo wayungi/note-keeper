@@ -1,5 +1,7 @@
 import noteModel from "../model/noteModel";
 import Note from "./Note";
+import AddNote from './AddNote';
+
 
 type NotesListProps = {
     notes: noteModel[],
@@ -14,6 +16,7 @@ const NotesList = ({notes, setNoteText, deleteNote}: NotesListProps) => {
     return (
         <section className="notes-list">
             {displayNotes}
+            <AddNote />
         </section>
     );
 };

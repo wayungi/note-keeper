@@ -25,3 +25,11 @@ section.notes-list {
   border-radius: 5px;
   padding:5px 10px;
 }
+
+div.add-note {
+  border: 2px dashed grey;
+  border-radius: 5px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
