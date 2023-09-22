@@ -19,6 +19,17 @@ const App = () => {
     }
   ]);
 
+  const save = (): void => {
+    localStorage.setItem('typescript-note-app', JSON.stringify(notes));
+  }
+
+  const getNotes = (): void => {
+    const localStoarageNotes: string | null = localStorage.getItem('typescript-note-app');
+    if(!localStoarageNotes) return;
+    const storedNotes: noteModel[] = JSON.parse(localStoarageNotes)
+    setNotes(storedNotes)
+  }
+
   const setNoteText = (text: string, id: string):void => {
     const editedElement: noteModel | undefined = notes.find((note) => note.id === id);
     if(!editedElement) return
