@@ -39,7 +39,7 @@ div.add-note {
 }
 
 .display-note, textarea {
-  height:90%;
+  height:80%;
   width:100%;
   resize: none;
   border:none;

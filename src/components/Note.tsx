@@ -15,8 +15,7 @@ const Note = ({note, setNoteText, deleteNote}: noteProps): JSX.Element /*other t
     const characterCount: number = 200;
 
     const handleTextChange = (value: string, id: string): void => {
-        // if(characterCount - value.length <= 0) return;
-        console.log(value)
+        if(characterCount - value.length <= 0) return;
         setText(value);
         setNoteText(value, id);
     }
@@ -42,8 +41,10 @@ const Note = ({note, setNoteText, deleteNote}: noteProps): JSX.Element /*other t
                 className="display-note"
             >{note.text}</div>}
 
+            <p>{isEditable && `${characterCount - text.length} characters remaining`} </p>
+
             <footer>
-                <p>{characterCount - text.length} characters remaining</p>
+                <p>{note.date}</p>
                 <span className="controls">
                     { isEditable && <button onClick={() => handleEditable()} className="save">save</button>}
                     <AiFillDelete onClick={() => handleDeleteNote(note.id)} className="delete-btn"/>
