@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import './App.css'
 import NotesList from './components/NotesList';
 import noteModel from './model/noteModel';
@@ -6,18 +6,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 const App = () => {
 
-  const [notes, setNotes] = useState<noteModel[]>([
-    {
-      text: 'today is it',
-      date: new Date().toLocaleDateString(),
-      id: "0980"
-    },
-    {
-      text: "Golan heights",
-      date: new Date().toLocaleDateString(),
-      id: "0988"
-    }
-  ]);
+  const [notes, setNotes] = useState<noteModel[]>([]);
+
+  useEffect(() => {
+    getNotes();
+  },[]);
 
   const save = (): void => {
     localStorage.setItem('typescript-note-app', JSON.stringify(notes));
@@ -34,11 +27,13 @@ const App = () => {
     const editedElement: noteModel | undefined = notes.find((note) => note.id === id);
     if(!editedElement) return
     editedElement.text = text;
+    save();
   }
 
   const deleteNote = (id: string): void => {
     const filteredNotes: noteModel[] = notes.filter((note) => note.id !== id);
     setNotes([...filteredNotes]);
+    save()
   }
 
   const addNote = (): void => {
