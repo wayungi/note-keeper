@@ -14,10 +14,11 @@ const Note = ({note, setNoteText, deleteNote}: noteProps): JSX.Element /*other t
     const [isEditable, setIsEditable] =  useState<boolean>(false);
     const characterCount: number = 200;
 
-    const handleTextChange = (value: string): void => {
-        if(characterCount - value.length <= 0) return;
+    const handleTextChange = (value: string, id: string): void => {
+        // if(characterCount - value.length <= 0) return;
+        console.log(value)
         setText(value);
-        setNoteText(value);
+        setNoteText(value, id);
     }
 
     const handleEditable = (): void => {
@@ -28,13 +29,11 @@ const Note = ({note, setNoteText, deleteNote}: noteProps): JSX.Element /*other t
         deleteNote(id);
     }
 
-    console.log(isEditable)
-
     return (
         <article className="notes">
             {isEditable && <textarea
                 placeholder="Add notes here ..."
-                onChange={(e) => handleTextChange(e.target.value)}
+                onChange={(e) => handleTextChange(e.target.value, note.id)}
                 value={text}
             />}
 

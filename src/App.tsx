@@ -19,8 +19,10 @@ const App = () => {
     }
   ]);
 
-  const setNoteText = ():void => {
-    console.log('hello world');
+  const setNoteText = (text: string, id: string):void => {
+    const editedElement: noteModel | undefined = notes.find((note) => note.id === id);
+    if(!editedElement) return
+    editedElement.text = text;
   }
 
   const deleteNote = (id: string): void => {
