@@ -34,6 +34,10 @@ div.add-note {
   align-items: center;
 }
 
+.display-note {
+  white-space: pre-wrap;
+}
+
 .display-note, textarea {
   height:90%;
   width:100%;
