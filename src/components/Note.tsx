@@ -28,6 +28,8 @@ const Note = ({note, setNoteText, deleteNote}: noteProps): JSX.Element /*other t
         deleteNote(id);
     }
 
+    console.log(isEditable)
+
     return (
         <article className="notes">
             {isEditable && <textarea
@@ -36,12 +38,17 @@ const Note = ({note, setNoteText, deleteNote}: noteProps): JSX.Element /*other t
                 value={text}
             />}
 
-            {!isEditable && <div onDoubleClick={() => handleEditable()}>{note.text}</div>}
+            {!isEditable && <div
+                onDoubleClick={() => handleEditable()}
+                className="display-note"
+            >{note.text}</div>}
 
             <footer>
                 <p>{characterCount - text.length} characters remaining</p>
-                { isEditable && <button onClick={() => handleEditable()}>save</button>}
-                <AiFillDelete onClick={() => handleDeleteNote(note.id)}/>
+                <span className="controls">
+                    { isEditable && <button onClick={() => handleEditable()} className="save">save</button>}
+                    <AiFillDelete onClick={() => handleDeleteNote(note.id)} className="delete-btn"/>
+                </span>
             </footer>
         </article>
     )
