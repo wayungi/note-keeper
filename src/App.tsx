@@ -37,6 +37,7 @@ const App = () => {
     const editedElement: noteModel | undefined = notes.find((note) => note.id === id);
     if(!editedElement) return
     editedElement.text = text;
+    editedElement.displayEditable = false;
     //save();
   }
 
@@ -51,11 +52,11 @@ const App = () => {
       text: "",
       date: new Date().toLocaleDateString(),
       id: uuidv4(),
-      new: true
+      displayEditable: true
     };
-
     setNotes([...notes, newNote]);
   }
+
 
 
   return (

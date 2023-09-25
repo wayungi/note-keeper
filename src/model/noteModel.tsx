@@ -2,7 +2,7 @@ type noteModel = {
     text: string,
     date: string,
     id: string,
-    new: boolean,
+    displayEditable: boolean
 };
 
 export default noteModel;

@@ -10,8 +10,8 @@ type noteProps = {
 
 const Note = ({note, updateNoteText, deleteNote}: noteProps): JSX.Element /*other types include: ReactNode, ...*/ => {
 
-    const [text, setText] = useState<string>("");
-    const [isEditable, setIsEditable] =  useState<boolean>(false);
+    const [text, setText] = useState<string>(note.text);
+    const [isEditable, setIsEditable] =  useState<boolean>(note.displayEditable);
     const characterCount: number = 200;
 
     const handleTextChange = (value: string, id: string): void => {
@@ -27,8 +27,6 @@ const Note = ({note, updateNoteText, deleteNote}: noteProps): JSX.Element /*othe
     const handleDeleteNote = (id: string): void => {
         deleteNote(id);
     }
-
-    
 
     return (
         <article className="notes">
