@@ -50,7 +50,8 @@ const App = () => {
     const newNote: noteModel = {
       text: "",
       date: new Date().toLocaleDateString(),
-      id: uuidv4()
+      id: uuidv4(),
+      new: true
     };
 
     setNotes([...notes, newNote]);

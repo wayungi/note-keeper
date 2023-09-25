@@ -28,6 +28,8 @@ const Note = ({note, updateNoteText, deleteNote}: noteProps): JSX.Element /*othe
         deleteNote(id);
     }
 
+    
+
     return (
         <article className="notes">
             {isEditable && <textarea
@@ -36,13 +38,8 @@ const Note = ({note, updateNoteText, deleteNote}: noteProps): JSX.Element /*othe
                 value={text}
             />}
 
-            {!isEditable && !text && <textarea
-                placeholder="Add notes here ..."
-                onChange={(e) => handleTextChange(e.target.value, note.id)}
-                value={text}
-            />}
-
-            {!isEditable && text && <div
+            {/* display div when the note is not editable & ut has content */}
+            {!isEditable && <div
                 onDoubleClick={() => handleEditable()}
                 className="display-note"
             >{note.text}</div>}
