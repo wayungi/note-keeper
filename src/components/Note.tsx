@@ -4,11 +4,11 @@ import noteModel from '../model/noteModel';
 
 type noteProps = {
     note : noteModel, /*{text: string, date: string, id: string}*/
-    setNoteText: (text: string) => void,
+    updateNoteText: (text: string, id: string) => void,
     deleteNote: (id: string) => void
 }
 
-const Note = ({note, setNoteText, deleteNote}: noteProps): JSX.Element /*other types include: ReactNode, ...*/ => {
+const Note = ({note, updateNoteText, deleteNote}: noteProps): JSX.Element /*other types include: ReactNode, ...*/ => {
 
     const [text, setText] = useState<string>("");
     const [isEditable, setIsEditable] =  useState<boolean>(false);
@@ -17,7 +17,7 @@ const Note = ({note, setNoteText, deleteNote}: noteProps): JSX.Element /*other t
     const handleTextChange = (value: string, id: string): void => {
         if(characterCount - value.length <= 0) return;
         setText(value);
-        setNoteText(value, id);
+        updateNoteText(value, id);
     }
 
     const handleEditable = (): void => {
@@ -36,7 +36,13 @@ const Note = ({note, setNoteText, deleteNote}: noteProps): JSX.Element /*other t
                 value={text}
             />}
 
-            {!isEditable && <div
+            {!isEditable && !text && <textarea
+                placeholder="Add notes here ..."
+                onChange={(e) => handleTextChange(e.target.value, note.id)}
+                value={text}
+            />}
+
+            {!isEditable && text && <div
                 onDoubleClick={() => handleEditable()}
                 className="display-note"
             >{note.text}</div>}

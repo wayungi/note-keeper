@@ -12,9 +12,19 @@ const App = () => {
     getNotes();
   },[]);
 
+  useEffect(() => {
+    save();
+  }, [notes]);
+
   const save = (): void => {
-    localStorage.setItem('typescript-note-app', JSON.stringify(notes));
+    if(notes.length > 0) {
+      localStorage.setItem('typescript-note-app', JSON.stringify(notes));
+    }else{
+      localStorage.removeItem('typescript-note-app');
+    }
   }
+
+
 
   const getNotes = (): void => {
     const localStoarageNotes: string | null = localStorage.getItem('typescript-note-app');
@@ -23,17 +33,17 @@ const App = () => {
     setNotes(storedNotes)
   }
 
-  const setNoteText = (text: string, id: string):void => {
+  const updateNoteText = (text: string, id: string):void => {
     const editedElement: noteModel | undefined = notes.find((note) => note.id === id);
     if(!editedElement) return
     editedElement.text = text;
-    save();
+    //save();
   }
 
   const deleteNote = (id: string): void => {
     const filteredNotes: noteModel[] = notes.filter((note) => note.id !== id);
     setNotes([...filteredNotes]);
-    save()
+    //save();
   }
 
   const addNote = (): void => {
@@ -51,7 +61,7 @@ const App = () => {
     <>
       <NotesList
         notes={notes}
-        setNoteText={setNoteText}
+        updateNoteText={updateNoteText}
         deleteNote={deleteNote}
         addNote={addNote}
       />

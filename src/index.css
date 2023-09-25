@@ -44,6 +44,7 @@ div.add-note {
   resize: none;
   border:none;
   border-radius:5px;
+  background-color: yellowgreen;
 }
 
 textarea:focus {

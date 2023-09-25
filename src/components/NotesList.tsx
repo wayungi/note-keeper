@@ -5,14 +5,14 @@ import AddNote from './AddNote';
 
 type NotesListProps = {
     notes: noteModel[],
-    setNoteText: (text: string) => void,
+    updateNoteText: (text: string, id: string) => void,
     deleteNote: (id: string) => void,
     addNote: () => void
 }
 
-const NotesList = ({notes, setNoteText, deleteNote, addNote}: NotesListProps) => {
+const NotesList = ({notes, updateNoteText, deleteNote, addNote}: NotesListProps) => {
 
-    const displayNotes: JSX.Element[] = notes.map((note) => <Note key={note.id} note={note} setNoteText={setNoteText} deleteNote={deleteNote}/>)
+    const displayNotes: JSX.Element[] = notes.map((note) => <Note key={note.id} note={note} updateNoteText={updateNoteText} deleteNote={deleteNote}/>)
 
     return (
         <section className="notes-list">
