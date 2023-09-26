@@ -43,12 +43,7 @@ const Note = ({note, updateNoteText, deleteNote}: noteProps): JSX.Element /*othe
                 value={text}
             />
 
-            {/* {<div
-                onDoubleClick={() => handleEditable()}
-                className="display-note"
-            >{note.text}</div>} */}
-
-            {/* <p>{isEditable && `${characterCount - text.length} characters remaining`} </p> */}
+            {<p>{`${characterCount - text.length} characters remaining`} </p> }
 
             <footer>
                 <p>{note.date}</p>

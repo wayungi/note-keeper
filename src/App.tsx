@@ -56,7 +56,6 @@ const App = () => {
       text: "",
       date: new Date().toLocaleDateString(),
       id: uuidv4(),
-      displayEditable: true
     };
     setNotes([...notes, newNote]);
   }
