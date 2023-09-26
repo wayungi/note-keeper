@@ -21,9 +21,10 @@ const Note = ({note, updateNoteText, deleteNote}: noteProps): JSX.Element /*othe
         setText(value);        
     }
 
+    // saves changes to the textarea when the sav button is clicked and hides the save button
     const saveChanges = (value: string, id: string): void => {
         setShowSaveButton(false);
-        updateNoteText(value, id);
+        updateNoteText(value, id); // writes the changes to local storage
 
         
         // setIsEditable((prev) => !prev)

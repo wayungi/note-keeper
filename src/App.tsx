@@ -4,20 +4,19 @@ import NotesList from './components/NotesList';
 import noteModel from './model/noteModel';
 import { v4 as uuidv4 } from 'uuid';
 
-const App = () => {
+const App = () => {}
 
   const [notes, setNotes] = useState<noteModel[]>([]);
-  const [hasChangesToSave, setHasChangesToSave ] = useState<boolean>(false);
+  const [saveToLocalStorage, setSaveToLocalStorage] = useState<boolean>(false);
 
   // load all notes from local storage when page loads
   useEffect(() => {
     getNotes();
   },[]);
 
-  // useEffect(() => {
-  //   save();
-  // }, [notes]);
-
+  useEffect(() => {
+    saveToLocalStorage && save() && setSaveToLocalStorage(false);
+  }, [saveToLocalStorage]);
 
   const getNotes = (): void => {
     const localStoarageNotes: string | null = localStorage.getItem('typescript-note-app');
@@ -26,22 +25,25 @@ const App = () => {
     setNotes(storedNotes)
   }
 
-  const save = (): void => {
+  const save = (): boolean => {
+    let hasSaved = false;
     if(notes.length > 0) {
       localStorage.setItem('typescript-note-app', JSON.stringify(notes));
+      hasSaved = !hasSaved
     }else{
       localStorage.removeItem('typescript-note-app');
     }
+    return hasSaved;
   }
 
 
+  /** this method will need improving the algorithm **/
   const updateNoteText = (text: string, id: string):void => {
     const editedElement: noteModel | undefined = notes.find((note) => note.id === id);
     if(!editedElement) return
     editedElement.text = text;
     editedElement.displayEditable = false;
-    console.log('here i am')
-    //save();
+    setSaveToLocalStorage(true);
   }
 
   const deleteNote = (id: string): void => {
