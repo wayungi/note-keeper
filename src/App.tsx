@@ -35,14 +35,12 @@ const App = () => {
   }
 
 
-
-  
-
   const updateNoteText = (text: string, id: string):void => {
     const editedElement: noteModel | undefined = notes.find((note) => note.id === id);
     if(!editedElement) return
     editedElement.text = text;
     editedElement.displayEditable = false;
+    console.log('here i am')
     //save();
   }
 

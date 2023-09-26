@@ -15,16 +15,19 @@ const Note = ({note, updateNoteText, deleteNote}: noteProps): JSX.Element /*othe
     // const [isEditable, setIsEditable] =  useState<boolean>(note.displayEditable);
     const characterCount: number = 200;
 
-    const handleTextChange = (value: string, id: string): void => {
+    const updateTextArea = (value: string): void => {
         if(characterCount - value.length <= 0) return;
         setShowSaveButton(true);
-        setText(value);
-        updateNoteText(value, id);
+        setText(value);        
     }
 
-    // const handleEditable = (): void => {
-    //     setIsEditable((prev) => !prev)
-    // }
+    const saveChanges = (value: string, id: string): void => {
+        setShowSaveButton(false);
+        updateNoteText(value, id);
+
+        
+        // setIsEditable((prev) => !prev)
+    }
 
     const handleDeleteNote = (id: string): void => {
         deleteNote(id);
@@ -34,7 +37,7 @@ const Note = ({note, updateNoteText, deleteNote}: noteProps): JSX.Element /*othe
         <article className="notes">
             <textarea
                 placeholder="Add notes here ..."
-                onChange={(e) => handleTextChange(e.target.value, note.id)}
+                onChange={(e) => updateTextArea(e.target.value)}
                 value={text}
             />
 
@@ -48,7 +51,7 @@ const Note = ({note, updateNoteText, deleteNote}: noteProps): JSX.Element /*othe
             <footer>
                 <p>{note.date}</p>
                 <span className="controls">
-                    { showSaveButton &&  <button onClick={() => handleEditable()} className="save">save</button>} 
+                    { showSaveButton &&  <button onClick={() => saveChanges(text, note.id)} className="save">save</button>} 
                     <AiFillDelete onClick={() => handleDeleteNote(note.id)} className="delete-btn"/>
                 </span>
             </footer>
