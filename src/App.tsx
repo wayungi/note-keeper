@@ -9,8 +9,6 @@ const App = () => {
   const [notes, setNotes] = useState<noteModel[]>([]);
   const [saveToLocalStorage, setSaveToLocalStorage] = useState<boolean>(false);
   
-
-  // load all notes from local storage when page loads
   useEffect(() => {
     getNotes();
   },[]);
@@ -23,7 +21,8 @@ const App = () => {
     const localStoarageNotes: string | null = localStorage.getItem('typescript-note-app');
     if(!localStoarageNotes) return;
     const storedNotes: noteModel[] = JSON.parse(localStoarageNotes)
-    setNotes(storedNotes)
+    const filteredStoredNotes = storedNotes.filter(storedNote => storedNote.text !== '')
+    setNotes(filteredStoredNotes)
   }
 
   const save = (): boolean => {
@@ -61,8 +60,6 @@ const App = () => {
     };
     setNotes([...notes, newNote]);
   }
-
-
 
   return (
     <>

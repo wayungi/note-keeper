@@ -26,10 +26,9 @@ const Note = ({note, updateNoteText, deleteNote}: noteProps): JSX.Element /*othe
         setShowSaveButton(false);
         if(text.trim().length) {
             updateNoteText(value, id); // writes the changes to local storage
-        }
-
-        
-        // setIsEditable((prev) => !prev)
+        }else {
+            console.log("cannot save blank note. Please delete the note instead")
+        }        
     }
 
     const handleDeleteNote = (id: string): void => {
