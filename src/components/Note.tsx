@@ -11,7 +11,7 @@ type noteProps = {
 const Note = ({note, updateNoteText, deleteNote}: noteProps): JSX.Element /*other types include: ReactNode, ...*/ => {
 
     const [text, setText] = useState<string>(note.text);
-    const [isEditable, setIsEditable] =  useState<boolean>(note.displayEditable);
+    // const [isEditable, setIsEditable] =  useState<boolean>(note.displayEditable);
     const characterCount: number = 200;
 
     const handleTextChange = (value: string, id: string): void => {
@@ -20,9 +20,9 @@ const Note = ({note, updateNoteText, deleteNote}: noteProps): JSX.Element /*othe
         updateNoteText(value, id);
     }
 
-    const handleEditable = (): void => {
-        setIsEditable((prev) => !prev)
-    }
+    // const handleEditable = (): void => {
+    //     setIsEditable((prev) => !prev)
+    // }
 
     const handleDeleteNote = (id: string): void => {
         deleteNote(id);
@@ -30,24 +30,23 @@ const Note = ({note, updateNoteText, deleteNote}: noteProps): JSX.Element /*othe
 
     return (
         <article className="notes">
-            {isEditable && <textarea
+            <textarea
                 placeholder="Add notes here ..."
                 onChange={(e) => handleTextChange(e.target.value, note.id)}
                 value={text}
-            />}
+            />
 
-            {/* display div when the note is not editable & ut has content */}
-            {!isEditable && <div
+            {/* {<div
                 onDoubleClick={() => handleEditable()}
                 className="display-note"
-            >{note.text}</div>}
+            >{note.text}</div>} */}
 
-            <p>{isEditable && `${characterCount - text.length} characters remaining`} </p>
+            {/* <p>{isEditable && `${characterCount - text.length} characters remaining`} </p> */}
 
             <footer>
                 <p>{note.date}</p>
                 <span className="controls">
-                    { isEditable && <button onClick={() => handleEditable()} className="save">save</button>}
+                    {/* { <button onClick={() => handleEditable()} className="save">save</button>} */}
                     <AiFillDelete onClick={() => handleDeleteNote(note.id)} className="delete-btn"/>
                 </span>
             </footer>
