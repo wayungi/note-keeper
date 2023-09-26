@@ -8,6 +8,7 @@ const App = () => {
 
   const [notes, setNotes] = useState<noteModel[]>([]);
   const [saveToLocalStorage, setSaveToLocalStorage] = useState<boolean>(false);
+  
 
   // load all notes from local storage when page loads
   useEffect(() => {
@@ -36,7 +37,6 @@ const App = () => {
     return hasSaved;
   }
 
-
   /** this method will need improving the algorithm **/
   const updateNoteText = (text: string, id: string):void => {
     const editedElement: noteModel | undefined = notes.find((note) => note.id === id);
@@ -49,7 +49,7 @@ const App = () => {
   const deleteNote = (id: string): void => {
     const filteredNotes: noteModel[] = notes.filter((note) => note.id !== id);
     setNotes([...filteredNotes]);
-    //save();
+    setSaveToLocalStorage(true);
   }
 
   const addNote = (): void => {
