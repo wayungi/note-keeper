@@ -4,7 +4,7 @@ import NotesList from './components/NotesList';
 import noteModel from './model/noteModel';
 import { v4 as uuidv4 } from 'uuid';
 
-const App = () => {}
+const App = () => {
 
   const [notes, setNotes] = useState<noteModel[]>([]);
   const [saveToLocalStorage, setSaveToLocalStorage] = useState<boolean>(false);
