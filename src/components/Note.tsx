@@ -11,11 +11,13 @@ type noteProps = {
 const Note = ({note, updateNoteText, deleteNote}: noteProps): JSX.Element /*other types include: ReactNode, ...*/ => {
 
     const [text, setText] = useState<string>(note.text);
+    const [showSaveButton, setShowSaveButton] = useState<boolean>(false);
     // const [isEditable, setIsEditable] =  useState<boolean>(note.displayEditable);
     const characterCount: number = 200;
 
     const handleTextChange = (value: string, id: string): void => {
         if(characterCount - value.length <= 0) return;
+        setShowSaveButton(true);
         setText(value);
         updateNoteText(value, id);
     }
@@ -46,7 +48,7 @@ const Note = ({note, updateNoteText, deleteNote}: noteProps): JSX.Element /*othe
             <footer>
                 <p>{note.date}</p>
                 <span className="controls">
-                    {/* { <button onClick={() => handleEditable()} className="save">save</button>} */}
+                    { showSaveButton &&  <button onClick={() => handleEditable()} className="save">save</button>} 
                     <AiFillDelete onClick={() => handleDeleteNote(note.id)} className="delete-btn"/>
                 </span>
             </footer>
