@@ -7,14 +7,24 @@ import { v4 as uuidv4 } from 'uuid';
 const App = () => {
 
   const [notes, setNotes] = useState<noteModel[]>([]);
+  const [hasChangesToSave, setHasChangesToSave ] = useState<boolean>(false);
 
+  // load all notes from local storage when page loads
   useEffect(() => {
     getNotes();
   },[]);
 
-  useEffect(() => {
-    save();
-  }, [notes]);
+  // useEffect(() => {
+  //   save();
+  // }, [notes]);
+
+
+  const getNotes = (): void => {
+    const localStoarageNotes: string | null = localStorage.getItem('typescript-note-app');
+    if(!localStoarageNotes) return;
+    const storedNotes: noteModel[] = JSON.parse(localStoarageNotes)
+    setNotes(storedNotes)
+  }
 
   const save = (): void => {
     if(notes.length > 0) {
@@ -26,12 +36,7 @@ const App = () => {
 
 
 
-  const getNotes = (): void => {
-    const localStoarageNotes: string | null = localStorage.getItem('typescript-note-app');
-    if(!localStoarageNotes) return;
-    const storedNotes: noteModel[] = JSON.parse(localStoarageNotes)
-    setNotes(storedNotes)
-  }
+  
 
   const updateNoteText = (text: string, id: string):void => {
     const editedElement: noteModel | undefined = notes.find((note) => note.id === id);
