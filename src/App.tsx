@@ -1,33 +1,73 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import {useState, useEffect} from 'react';
 import './App.css'
+import NotesList from './components/NotesList';
+import noteModel from './model/noteModel';
+import { v4 as uuidv4 } from 'uuid';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+
+  const [notes, setNotes] = useState<noteModel[]>([]);
+  const [saveToLocalStorage, setSaveToLocalStorage] = useState<boolean>(false);
+  
+  useEffect(() => {
+    getNotes();
+  },[]);
+
+  useEffect(() => {
+    saveToLocalStorage && save() && setSaveToLocalStorage(false);
+  }, [saveToLocalStorage]);
+
+  const getNotes = (): void => {
+    const localStoarageNotes: string | null = localStorage.getItem('typescript-note-app');
+    if(!localStoarageNotes) return;
+    const storedNotes: noteModel[] = JSON.parse(localStoarageNotes)
+    const filteredStoredNotes = storedNotes.filter(storedNote => storedNote.text !== '')
+    setNotes(filteredStoredNotes)
+  }
+
+  const save = (): boolean => {
+    let hasSaved = false;
+    if(notes.length > 0) {
+      localStorage.setItem('typescript-note-app', JSON.stringify(notes));
+      hasSaved = !hasSaved
+    }else{
+      localStorage.removeItem('typescript-note-app');
+    }
+    return hasSaved;
+  }
+
+  /** this method will need improving the algorithm **/
+  const updateNoteText = (text: string, id: string):void => {
+    const editedElement: noteModel | undefined = notes.find((note) => note.id === id);
+    if(!editedElement) return
+    editedElement.text = text;
+    editedElement.displayEditable = false;
+    setSaveToLocalStorage(true);
+  }
+
+  const deleteNote = (id: string): void => {
+    const filteredNotes: noteModel[] = notes.filter((note) => note.id !== id);
+    setNotes([...filteredNotes]);
+    setSaveToLocalStorage(true);
+  }
+
+  const addNote = (): void => {
+    const newNote: noteModel = {
+      text: "",
+      date: new Date().toLocaleDateString(),
+      id: uuidv4(),
+    };
+    setNotes([...notes, newNote]);
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <NotesList
+        notes={notes}
+        updateNoteText={updateNoteText}
+        deleteNote={deleteNote}
+        addNote={addNote}
+      />
     </>
   )
 }
